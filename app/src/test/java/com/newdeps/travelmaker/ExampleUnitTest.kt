@@ -1,4 +1,4 @@
-package com.example.travelmaker
+package com.newdeps.travelmaker
 
 import org.junit.Test
 
