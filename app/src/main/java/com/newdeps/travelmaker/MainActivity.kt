@@ -31,22 +31,24 @@ class MainActivity : AppCompatActivity() {
         NaverMapSdk.getInstance(this).client = NaverMapSdk.NaverCloudPlatformClient(getString(R.string.naver_map_client_key))
 
         val fm = supportFragmentManager
-        val mapFragment = fm.findFragmentById(R.id.naver_map_view) as MapFragment?
-            ?: MapFragment.newInstance().also {
-                fm.beginTransaction().add(R.id.naver_map_view, it).commit()
-            }
+        val mapFragment =
+            fm.findFragmentById(R.id.naver_map_view) as MapFragment? ?: MapFragment.newInstance()
+                .also {
+                    fm.beginTransaction().add(R.id.naver_map_view, it).commit()
+                }
 
         // MapFragment가 준비되면 지도 초기화 작업 수행
         mapFragment.getMapAsync { naverMap ->
             this.naverMap = naverMap
-            // 지도 초기화 작업 수행
-            // 예: 마커 추가, 이벤트 리스너 등록 등
-            naverMap.apply {
+
+            // 지도 초기화 작업 수행 (ex. 마커 추가, 이벤트 리스너 등록 등)
+            this.naverMap.apply {
                 mapType = NaverMap.MapType.Basic
+                moveCamera(CameraUpdate.zoomTo(17.0))
             }
 
-            moveMap(37.483725, 126.876613) //롯데정보통신 본사
-            setMarker(37.483725, 126.876613) //롯데정보통신 본사 마커 표시
+            moveMap(37.483725, 126.876613)
+            setMarker(37.483725, 126.876613)
             mapClickListener()
         }
     }
