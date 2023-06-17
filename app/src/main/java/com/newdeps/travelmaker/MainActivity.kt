@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
     /** 마커 생성 */
     private fun setMarker(lat: Double, lng: Double) {
         clickMarker = Marker()
-        clickMarker.position = LatLng(lat, lng) //위치설정
+        clickMarker.position = LatLng(lat, lng)
         clickMarker.icon = OverlayImage.fromResource(R.drawable.location_pin)
         clickMarker.width = 100
         clickMarker.height = 100

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="mainActivity"
             type="com.newdeps.travelmaker.MainActivity" />
@@ -54,10 +55,42 @@
             android:text="@{geocoderViewModel.addressResult}"
             android:textSize="14dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tv_move_marker_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/naver_map_view" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_move_marker_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F0F0F0"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/marker_list"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_set_marker"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_location_name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_set_marker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/marker_set"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_move_marker_list" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
