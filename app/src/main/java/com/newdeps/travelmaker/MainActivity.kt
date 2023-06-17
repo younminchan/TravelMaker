@@ -15,6 +15,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.newdeps.travelmaker.databinding.ActivityMainBinding
 import com.newdeps.travelmaker.viewmodel.GeocoderViewModel
+import com.newdeps.travelmaker.viewmodel.MarkerViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,6 +23,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     private lateinit var geocoderViewModel: GeocoderViewModel
+    private lateinit var markerViewModel: MarkerViewModel
 
     lateinit var naverMap: NaverMap
     var clickMarker = Marker()
@@ -32,11 +34,13 @@ class MainActivity : AppCompatActivity() {
 
         //ViewModel
         geocoderViewModel = ViewModelProvider(this)[GeocoderViewModel::class.java]
+        markerViewModel = ViewModelProvider(this)[MarkerViewModel::class.java]
 
         //DataBinding
         binding.lifecycleOwner = this //데이터바인딩 Lifecycle에 종속, LifeCycle_Observe역할
         binding.mainActivity = this
         binding.geocoderViewModel = geocoderViewModel
+        binding.markerViewModel = markerViewModel
 
         mainActivityInit()
     }
@@ -44,11 +48,16 @@ class MainActivity : AppCompatActivity() {
     /** init */
     private fun mainActivityInit() {
         naverMapInit()
+        setObserve()
     }
 
     /** ViewModel Observe */
     private fun setObserve() {
-
+        markerViewModel.markerList.observe(this) { it ->
+            it.forEachIndexed { index, marker ->
+                marker.map = naverMap
+            }
+        }
     }
 
     /** NaverMap init */
@@ -71,7 +80,6 @@ class MainActivity : AppCompatActivity() {
 
             //기본 설정
             moveMap(37.483725, 126.876613)
-            setMarker(37.483725, 126.876613)
             mapListener()
         }
     }
@@ -111,7 +119,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /** 마커 생성 */
-    private fun setMarker(lat: Double, lng: Double) {
+    fun setMarker(lat: Double, lng: Double) {
         clickMarker = Marker()
         clickMarker.position = LatLng(lat, lng)
         clickMarker.icon = OverlayImage.fromResource(R.drawable.location_pin)
@@ -124,6 +132,19 @@ class MainActivity : AppCompatActivity() {
         clickMarker.map = naverMap
     }
 
+    fun setMarker() {
+        val latitude = naverMap.cameraPosition.target.latitude
+        val longitude = naverMap.cameraPosition.target.longitude
+
+        var marker = Marker().apply {
+            position = LatLng(latitude, longitude)
+            icon = OverlayImage.fromResource(R.drawable.location_pin)
+            width = 100
+            height = 100
+        }
+
+        markerViewModel.addMarker(marker)
+    }
 
 
 
