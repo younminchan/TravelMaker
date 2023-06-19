@@ -87,7 +87,7 @@
             android:textColor="@color/white"
             android:textSize="14dp"
             android:textStyle="bold"
-            android:onClick="@{() -> mainActivity.setMarker()}"
+            android:onClick="@{() -> mainActivity.insertMarker()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

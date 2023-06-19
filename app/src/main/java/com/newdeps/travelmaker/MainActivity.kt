@@ -48,14 +48,21 @@ class MainActivity : AppCompatActivity() {
     /** init */
     private fun mainActivityInit() {
         naverMapInit()
-        setObserve()
     }
 
     /** ViewModel Observe */
     private fun setObserve() {
+        //마커리스트 표시 - 나중에 삭제
         markerViewModel.markerList.observe(this) { it ->
             it.forEachIndexed { index, marker ->
                 marker.map = naverMap
+            }
+        }
+
+        markerViewModel.dbMarkerList.observe(this) { it ->
+            it.forEachIndexed { index, roomModel ->
+                Log.e("YMC", "index: $index / roomModel: $roomModel")
+                setMarker(roomModel.lat, roomModel.lng)
             }
         }
     }
@@ -81,6 +88,8 @@ class MainActivity : AppCompatActivity() {
             //기본 설정
             moveMap(37.483725, 126.876613)
             mapListener()
+
+            setObserve()
         }
     }
 
@@ -91,15 +100,19 @@ class MainActivity : AppCompatActivity() {
             addOnCameraIdleListener(cameraIdleListener)
 
             //롱 클릭
-            setOnMapLongClickListener { point, coord ->
-                Toast.makeText(this@MainActivity, "${coord.latitude}, ${coord.longitude}", Toast.LENGTH_SHORT).show()
-
-                clickMarker.map = null //기존 마커 삭제
-                setMarker(coord.latitude, coord.longitude) //마커 생성
-            }
+            setOnMapLongClickListener(cameraLongClick)
         }
     }
 
+    /** 카메라 롱 클릭*/
+    private val cameraLongClick = NaverMap.OnMapLongClickListener { pointF, latLng ->
+        var lat = latLng.latitude
+        var lng = latLng.longitude
+        Toast.makeText(this@MainActivity, "lat: $lat, lng: $lng", Toast.LENGTH_SHORT).show()
+
+        clickMarker.map = null //기존 마커 삭제
+        setMarker(lat, lng) //마커 생성
+    }
     /** 카메라 움직임 종료 체크 */
     private val cameraIdleListener = NaverMap.OnCameraIdleListener {
         val latitude = naverMap.cameraPosition.target.latitude
@@ -126,13 +139,11 @@ class MainActivity : AppCompatActivity() {
         clickMarker.width = 100
         clickMarker.height = 100
 
-        //clickMarker.icon = MarkerIcons.BLACK //색상
-        //clickMarker.iconTintColor = Color.RED //색상 Tint
-
         clickMarker.map = naverMap
     }
 
     fun setMarker() {
+        //현재위치 저장
         val latitude = naverMap.cameraPosition.target.latitude
         val longitude = naverMap.cameraPosition.target.longitude
 
@@ -146,6 +157,14 @@ class MainActivity : AppCompatActivity() {
         markerViewModel.addMarker(marker)
     }
 
+
+    fun insertMarker() {
+        //현재위치
+        val latitude = naverMap.cameraPosition.target.latitude
+        val longitude = naverMap.cameraPosition.target.longitude
+
+        markerViewModel.insertMarker(latitude, longitude)
+    }
 
 
 
