@@ -25,11 +25,6 @@ class MarkerViewModel : ViewModel() {
     //DB에 저장된 마커 리스트
     private val _dbMarkerList = MutableLiveData<List<RoomModel>>(emptyList())
     val dbMarkerList: LiveData<List<RoomModel>> = repository.getAllMarker()
-//    val dbMarkerList: LiveData<List<RoomModel>> = _dbMarkerList
-    fun getMarker() {
-        var markerList = repository.getAllMarker().value.orEmpty().toMutableList()
-        _dbMarkerList.value = markerList
-    }
 
     fun insertMarker(lat:Double, lng: Double) {
         var markerModel = RoomModel(0, lat, lng)
