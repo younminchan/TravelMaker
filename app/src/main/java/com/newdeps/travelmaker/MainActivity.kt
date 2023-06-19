@@ -11,6 +11,7 @@ import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.NaverMapSdk
+import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.newdeps.travelmaker.databinding.ActivityMainBinding
@@ -50,23 +51,6 @@ class MainActivity : AppCompatActivity() {
         naverMapInit()
     }
 
-    /** ViewModel Observe */
-    private fun setObserve() {
-        //마커리스트 표시 - 나중에 삭제
-        markerViewModel.markerList.observe(this) { it ->
-            it.forEachIndexed { index, marker ->
-                marker.map = naverMap
-            }
-        }
-
-        markerViewModel.dbMarkerList.observe(this) { it ->
-            it.forEachIndexed { index, roomModel ->
-                Log.e("YMC", "index: $index / roomModel: $roomModel")
-                setMarker(roomModel.lat, roomModel.lng)
-            }
-        }
-    }
-
     /** NaverMap init */
     private fun naverMapInit() {
         NaverMapSdk.getInstance(this).client = NaverMapSdk.NaverCloudPlatformClient(getString(R.string.naver_map_client_key))
@@ -75,32 +59,29 @@ class MainActivity : AppCompatActivity() {
         val mapFragment = fm.findFragmentById(R.id.naver_map_view) as MapFragment? ?: MapFragment.newInstance()
             .also { fm.beginTransaction().add(R.id.naver_map_view, it).commit() }
 
-        // MapFragment 준비 완료
-        mapFragment.getMapAsync { naverMap ->
-            this.naverMap = naverMap
-
-            // 지도 초기화 작업 수행 (ex. 마커 추가, 이벤트 리스너 등록 등)
-            this.naverMap.apply {
-                mapType = NaverMap.MapType.Basic
-                moveCamera(CameraUpdate.zoomTo(17.0))
-            }
-
-            //기본 설정
-            moveMap(37.483725, 126.876613)
-            mapListener()
-
-            setObserve()
-        }
+        mapFragment.getMapAsync(onMapReadyCallback)
     }
 
-    /** Listener */
-    private fun mapListener() {
-        naverMap.apply {
-            //카메라 움직임 종료 시
-            addOnCameraIdleListener(cameraIdleListener)
+    private val onMapReadyCallback = OnMapReadyCallback() { naverMap ->
+        this.naverMap = naverMap.apply {
+            mapType = NaverMap.MapType.Basic
+            moveCamera(CameraUpdate.zoomTo(17.0))
+            addOnCameraIdleListener(cameraIdleListener) //카메라 움직임 종료 시
+            setOnMapLongClickListener(cameraLongClick)  //롱 클릭
+        }
 
-            //롱 클릭
-            setOnMapLongClickListener(cameraLongClick)
+        //기본 설정
+        setObserve()
+        moveMap(37.483725, 126.876613)
+    }
+
+    /** Observe */
+    private fun setObserve() {
+        markerViewModel.dbMarkerList.observe(this) { it ->
+            it.forEachIndexed { index, roomModel ->
+                Log.e("YMC", "index: $index / roomModel: $roomModel")
+                setMarker(roomModel.lat, roomModel.lng)
+            }
         }
     }
 
@@ -108,7 +89,7 @@ class MainActivity : AppCompatActivity() {
     private val cameraLongClick = NaverMap.OnMapLongClickListener { pointF, latLng ->
         var lat = latLng.latitude
         var lng = latLng.longitude
-        Toast.makeText(this@MainActivity, "lat: $lat, lng: $lng", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this@MainActivity, "카메라 롱 클릭 / lat: $lat, lng: $lng", Toast.LENGTH_SHORT).show()
 
         clickMarker.map = null //기존 마커 삭제
         setMarker(lat, lng) //마커 생성
@@ -133,33 +114,17 @@ class MainActivity : AppCompatActivity() {
 
     /** 마커 생성 */
     fun setMarker(lat: Double, lng: Double) {
-        clickMarker = Marker()
-        clickMarker.position = LatLng(lat, lng)
-        clickMarker.icon = OverlayImage.fromResource(R.drawable.location_pin)
-        clickMarker.width = 100
-        clickMarker.height = 100
-
-        clickMarker.map = naverMap
-    }
-
-    fun setMarker() {
-        //현재위치 저장
-        val latitude = naverMap.cameraPosition.target.latitude
-        val longitude = naverMap.cameraPosition.target.longitude
-
-        var marker = Marker().apply {
-            position = LatLng(latitude, longitude)
+        clickMarker = Marker().apply {
+            position = LatLng(lat, lng)
             icon = OverlayImage.fromResource(R.drawable.location_pin)
             width = 100
             height = 100
         }
-
-        markerViewModel.addMarker(marker)
+        clickMarker.map = naverMap
     }
 
-
+    /** 마커 저장 */
     fun insertMarker() {
-        //현재위치
         val latitude = naverMap.cameraPosition.target.latitude
         val longitude = naverMap.cameraPosition.target.longitude
 
@@ -167,5 +132,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        this.finishAffinity()
+    }
 }

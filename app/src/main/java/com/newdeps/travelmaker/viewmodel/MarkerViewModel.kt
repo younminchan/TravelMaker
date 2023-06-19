@@ -25,6 +25,12 @@ class MarkerViewModel : ViewModel() {
     //DB에 저장된 마커 리스트
     private val _dbMarkerList = MutableLiveData<List<RoomModel>>(emptyList())
     val dbMarkerList: LiveData<List<RoomModel>> = repository.getAllMarker()
+//    val dbMarkerList: LiveData<List<RoomModel>> = _dbMarkerList
+    fun getMarker() {
+        var markerList = repository.getAllMarker().value.orEmpty().toMutableList()
+        _dbMarkerList.value = markerList
+    }
+
     fun insertMarker(lat:Double, lng: Double) {
         var markerModel = RoomModel(0, lat, lng)
         CoroutineScope(Dispatchers.IO).launch {
@@ -33,14 +39,14 @@ class MarkerViewModel : ViewModel() {
     }
 
 
-    //마커 리스트
-    private val _markerList = MutableLiveData<List<Marker>>(emptyList())
-    val markerList: LiveData<List<Marker>> = _markerList
-
-    fun addMarker(marker: Marker) {
-        //TODO: orEmpty는 null일때 빈 list를 반환
-        val currentList = _markerList.value.orEmpty().toMutableList()
-        currentList.add(marker)
-        _markerList.value = currentList
-    }
+    //ViewModel Example
+//    private val _markerList = MutableLiveData<List<Marker>>(emptyList())
+//    val markerList: LiveData<List<Marker>> = _markerList
+//
+//    fun addMarker(marker: Marker) {
+//        //"orEmpty"는 null일때 빈 list를 반환
+//        val currentList = _markerList.value.orEmpty().toMutableList()
+//        currentList.add(marker)
+//        _markerList.value = currentList
+//    }
 }
