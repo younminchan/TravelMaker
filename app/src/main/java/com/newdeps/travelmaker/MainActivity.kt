@@ -67,7 +67,9 @@ class MainActivity : AppCompatActivity() {
             mapType = NaverMap.MapType.Basic
             moveCamera(CameraUpdate.zoomTo(17.0))
             addOnCameraIdleListener(cameraIdleListener) //카메라 움직임 종료 시
-            setOnMapLongClickListener(cameraLongClick)  //롱 클릭
+            //setOnMapLongClickListener(cameraLongClick)  //롱 클릭
+            onMapLongClickListener = cameraLongClick
+            onSymbolClickListener = symbolListener
         }
 
         //기본 설정
@@ -87,12 +89,13 @@ class MainActivity : AppCompatActivity() {
 
     /** 카메라 롱 클릭*/
     private val cameraLongClick = NaverMap.OnMapLongClickListener { pointF, latLng ->
+        clickMarker.map = null //기존 마커 삭제
+
         var lat = latLng.latitude
         var lng = latLng.longitude
-        Toast.makeText(this@MainActivity, "카메라 롱 클릭 / lat: $lat, lng: $lng", Toast.LENGTH_SHORT).show()
-
-        clickMarker.map = null //기존 마커 삭제
         setMarker(lat, lng) //마커 생성
+
+        Toast.makeText(this@MainActivity, "카메라 롱 클릭 / lat: $lat, lng: $lng", Toast.LENGTH_SHORT).show()
     }
     /** 카메라 움직임 종료 체크 */
     private val cameraIdleListener = NaverMap.OnCameraIdleListener {
@@ -101,9 +104,25 @@ class MainActivity : AppCompatActivity() {
         val zoomLevel = naverMap.cameraPosition.zoom
 
         CoroutineScope(Dispatchers.Main).launch {
+            //위도,경도 -> 주소 변환
             geocoderViewModel.getAddressFromLatLng(applicationContext, latitude, longitude) //위도, 경도 -> 주소 변환
         }
         Log.e("YMC", "cameraIdleListener: $latitude, Longitude: $longitude, Zoom Level: $zoomLevel")
+    }
+
+    private val symbolListener = NaverMap.OnSymbolClickListener { symbol ->
+        Log.e("YMC", "symbol: $symbol")
+        Toast.makeText(this, "symbol.caption: ${symbol.caption} / symbol.position: ${symbol.position}", Toast.LENGTH_SHORT).show()
+        true
+
+//        if (symbol.caption == "서울특별시청") {
+//            Toast.makeText(this, "서울시청 클릭", Toast.LENGTH_SHORT).show()
+//            // 이벤트 소비, OnMapClick 이벤트는 발생하지 않음
+//            true
+//        } else {
+//            // 이벤트 전파, OnMapClick 이벤트가 발생함
+//            false
+//        }
     }
 
     /** 지도 이동 */
@@ -114,13 +133,12 @@ class MainActivity : AppCompatActivity() {
 
     /** 마커 생성 */
     fun setMarker(lat: Double, lng: Double) {
-        clickMarker = Marker().apply {
+        Marker().apply {
             position = LatLng(lat, lng)
             icon = OverlayImage.fromResource(R.drawable.location_pin)
             width = 100
             height = 100
-        }
-        clickMarker.map = naverMap
+        }.map = naverMap
     }
 
     /** 마커 저장 */
