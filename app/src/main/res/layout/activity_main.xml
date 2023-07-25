@@ -3,95 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="mainActivity"
-            type="com.newdeps.travelmaker.MainActivity" />
-        <variable
-            name="geocoderViewModel"
-            type="com.newdeps.travelmaker.viewmodel.GeocoderViewModel" />
-        <variable
-            name="markerViewModel"
-            type="com.newdeps.travelmaker.viewmodel.MarkerViewModel" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.newdeps.travelmaker.MainActivity">
+        tools:context="com.newdeps.travelmaker.view.MainActivity">
 
-        <fragment
-            android:id="@+id/naver_map_view"
-            android:name="com.naver.maps.map.MapFragment"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_ma_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/tv_location_name"
+            app:layout_constraintBottom_toTopOf="@+id/cl_ma_bottom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/cl_naver_map_center"
-            android:layout_width="0.1dp"
-            android:layout_height="0.1dp"
-            app:layout_constraintBottom_toBottomOf="@+id/naver_map_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/naver_map_view" />
+            <!-- Viewpager2의 상대 위치가 제대로 지정이 안되면 계속 깜빡하는 이슈 있음 -->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vp_ma_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/location_pin"
-            app:layout_constraintBottom_toTopOf="@+id/cl_naver_map_center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_location_name"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_ma_bottom"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="@{geocoderViewModel.addressResult}"
-            android:textSize="14dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/tv_move_marker_list"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/naver_map_view" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_move_marker_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:background="#F0F0F0"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/marker_list"
-            android:textSize="14dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/tv_set_marker"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_location_name" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_set_marker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#000000"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/marker_set"
-            android:textColor="@color/white"
-            android:textSize="14dp"
-            android:textStyle="bold"
-            android:onClick="@{() -> mainActivity.insertMarker()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_move_marker_list" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="하단바"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
