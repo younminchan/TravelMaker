@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="space_300">300dp</dimen>
+    <dimen name="space_200">200dp</dimen>
+    <dimen name="space_100">100dp</dimen>
+    <dimen name="space_90">90dp</dimen>
+    <dimen name="space_80">80dp</dimen>
+    <dimen name="space_70">70dp</dimen>
+    <dimen name="space_64">64dp</dimen>
+    <dimen name="space_60">60dp</dimen>
+    <dimen name="space_58">58dp</dimen>
+    <dimen name="space_52">52dp</dimen>
+    <dimen name="space_50">50dp</dimen>
+    <dimen name="space_48">48dp</dimen>
+    <dimen name="space_42">42dp</dimen>
+    <dimen name="space_40">40dp</dimen>
+    <dimen name="space_38">38dp</dimen>
+    <dimen name="space_36">36dp</dimen>
+    <dimen name="space_34">34dp</dimen>
+    <dimen name="space_32">32dp</dimen>
+    <dimen name="space_30">30dp</dimen>
+    <dimen name="space_26">26dp</dimen>
+    <dimen name="space_25">25dp</dimen>
+    <dimen name="space_24">24dp</dimen>
+    <dimen name="space_23">23dp</dimen>
+    <dimen name="space_22">22dp</dimen>
+    <dimen name="space_21">21dp</dimen>
+    <dimen name="space_20">20dp</dimen>
+    <dimen name="space_19">19dp</dimen>
+    <dimen name="space_18">18dp</dimen>
+    <dimen name="space_17">17dp</dimen>
+    <dimen name="space_16">16dp</dimen>
+    <dimen name="space_15">15dp</dimen>
+    <dimen name="space_14">14dp</dimen>
+    <dimen name="space_13">13dp</dimen>
+    <dimen name="space_12">12dp</dimen>
+    <dimen name="space_11">11dp</dimen>
+    <dimen name="space_10">10dp</dimen>
+    <dimen name="space_9">9dp</dimen>
+    <dimen name="space_8">8dp</dimen>
+    <dimen name="space_7">7dp</dimen>
+    <dimen name="space_6">6dp</dimen>
+    <dimen name="space_5">5dp</dimen>
+    <dimen name="space_4">4dp</dimen>
+    <dimen name="space_3">3dp</dimen>
+    <dimen name="space_2">2dp</dimen>
+    <dimen name="space_1">1dp</dimen>
+
+    <dimen name="font_40">40dp</dimen>
+    <dimen name="font_39">39dp</dimen>
+    <dimen name="font_38">38dp</dimen>
+    <dimen name="font_37">37dp</dimen>
+    <dimen name="font_36">36dp</dimen>
+    <dimen name="font_35">35dp</dimen>
+    <dimen name="font_34">34dp</dimen>
+    <dimen name="font_33">33dp</dimen>
+    <dimen name="font_32">32dp</dimen>
+    <dimen name="font_31">31dp</dimen>
+    <dimen name="font_30">30dp</dimen>
+    <dimen name="font_29">29dp</dimen>
+    <dimen name="font_28">28dp</dimen>
+    <dimen name="font_27">27dp</dimen>
+    <dimen name="font_26">26dp</dimen>
+    <dimen name="font_25">25dp</dimen>
+    <dimen name="font_24">24dp</dimen>
+    <dimen name="font_23">23dp</dimen>
+    <dimen name="font_22">22dp</dimen>
+    <dimen name="font_21">21dp</dimen>
+    <dimen name="font_20">20dp</dimen>
+    <dimen name="font_18">18dp</dimen>
+    <dimen name="font_17">17dp</dimen>
+    <dimen name="font_16">16dp</dimen>
+    <dimen name="font_15">15dp</dimen>
+    <dimen name="font_14">14dp</dimen>
+    <dimen name="font_13">13dp</dimen>
+    <dimen name="font_12">12dp</dimen>
+    <dimen name="font_11">11dp</dimen>
+    <dimen name="font_10">10dp</dimen>
+    <dimen name="font_8">8dp</dimen>
+    <dimen name="font_7">7dp</dimen>
+
+    <dimen name="mainMargin">3dp</dimen>
+    <dimen name="filterMargin">5dp</dimen>
+    <dimen name="listIconSize">20dp</dimen>
+    <dimen name="listIconMargin">3dp</dimen>
+    <dimen name="storeContentMargin">20dp</dimen>
+    <dimen name="storeInfoMargin">7dp</dimen>
+    <dimen name="storeInfoGroupTopMargin">10dp</dimen>
+
+    <!-- 새로 시작 -->
+    <!-- d : default, s,l, xl .. 이런 형식으로 (옷사이즈) 5단위로 작업하자 -->
+    <!-- beetween - margin, start_end - padding -->
+    <dimen name="page_margin_d">15dp</dimen>
+    <dimen name="page_margin_s">10dp</dimen>
+    <dimen name="page_margin_l">20dp</dimen>
+    <dimen name="page_margin_xl">30dp</dimen>
+
+    <dimen name="obj_between_d">10dp</dimen>
+    <dimen name="obj_between_xs">3dp</dimen>
+    <dimen name="obj_between_s">5dp</dimen>
+    <dimen name="obj_between_l">15dp</dimen>
+    <dimen name="obj_between_xl">20dp</dimen>
+    <dimen name="obj_between_2xl">25dp</dimen>
+    <dimen name="obj_between_3xl">30dp</dimen>
+    <dimen name="obj_between_4xl">35dp</dimen>
+    <dimen name="obj_between_5xl">40dp</dimen>
+    <dimen name="obj_between_6xl">45dp</dimen>
+    <dimen name="obj_between_7xl">50dp</dimen>
+    <dimen name="obj_between_8xl">55dp</dimen>
+    <dimen name="obj_between_9xl">60dp</dimen>
+
+    <dimen name="obj_start_end_d">10dp</dimen>
+    <dimen name="obj_start_end_s">5dp</dimen>
+    <dimen name="obj_start_end_l">15dp</dimen>
+    <dimen name="obj_start_end_xl">20dp</dimen>
+    <dimen name="obj_start_end_2xl">25dp</dimen>
+
+    <dimen name="obj_size_d">30dp</dimen>
+    <dimen name="obj_size_xs">15dp</dimen>
+    <dimen name="obj_size_2xs">10dp</dimen>
+    <dimen name="obj_size_s">20dp</dimen>
+    <dimen name="obj_size_l">40dp</dimen>
+    <dimen name="obj_size_xl">50dp</dimen>
+    <dimen name="obj_size_2xl">60dp</dimen>
+
+    <dimen name="text_size_d">16dp</dimen>
+    <dimen name="text_size_s">14dp</dimen>
+    <dimen name="text_size_xs">12dp</dimen>
+    <dimen name="text_size_l">18dp</dimen>
+    <dimen name="text_size_xl">20dp</dimen>
+
+    <dimen name="line_zero">0dp</dimen>
+    <dimen name="line_d">3dp</dimen>
+    <dimen name="line_s">1dp</dimen>
+    <dimen name="line_l">5dp</dimen>
+
+    <!-- custom -->
+
+
+</resources>

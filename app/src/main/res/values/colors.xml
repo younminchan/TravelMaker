@@ -2,4 +2,33 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="blue">#0000FF</color>
+
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+
+    <!-- Main_Color -->
+
+    <!-- Custom -->
+    <color name="c_abb0bc">#abb0bc</color>
+    <color name="c_f3f3f3">#F3F3F3</color>
+    <color name="c_f83030">#F83030</color>
+    <color name="c_626974">#626974</color>
+    <color name="c_a5a7aa">#A5A7AA</color>
+    <color name="c_b4b4b4">#B4B4B4</color>
+    <color name="c_949494">#949494</color>
+    <color name="c_484E55">#484E55</color>
+    <color name="c_2E343D">#2E343D</color>
+    <color name="c_8B95A1">#8B95A1</color>
+    <color name="c_D2D2D2">#D2D2D2</color>
+    <color name="c_fafafa">#FAFAFA</color>
+    <color name="c_f6f6f6">#F6F6F6</color>
+    <color name="c_e9f0ff">#E9F0FF</color>
+    <color name="c_f0f0f0">#F0F0F0</color>
+    <color name="c_93918d">#93918d</color>
+    <color name="c_d3d4d6">#d3d4d6</color>
+    <color name="c_b3c4c4c4">#B3C4C4C4</color>
 </resources>

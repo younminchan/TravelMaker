@@ -18,16 +18,15 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.newdeps.travelmaker.R
-import com.newdeps.travelmaker.databinding.FragmentTab1Binding
+import com.newdeps.travelmaker.databinding.FragmentRecommendBinding
 import com.newdeps.travelmaker.viewmodel.GeocoderViewModel
 import com.newdeps.travelmaker.viewmodel.MarkerViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-/** 네이버 지도 코드 백업용 */
-class Tab1Fragment : Fragment() {
-    lateinit var binding: FragmentTab1Binding
+class RecommendFragment : Fragment() {
+    lateinit var binding: FragmentRecommendBinding
     private lateinit var geocoderViewModel: GeocoderViewModel
     private lateinit var markerViewModel: MarkerViewModel
 
@@ -39,7 +38,7 @@ class Tab1Fragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tab1, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recommend, container, false)
 
         //ViewModel
         geocoderViewModel = ViewModelProvider(requireActivity())[GeocoderViewModel::class.java]
@@ -47,7 +46,7 @@ class Tab1Fragment : Fragment() {
 
         //DataBinding
         binding.lifecycleOwner = this //데이터바인딩 Lifecycle에 종속, LifeCycle_Observe역할
-        binding.mainActivity = this
+        binding.recommendFragment = this
         binding.geocoderViewModel = geocoderViewModel
         binding.markerViewModel = markerViewModel
 
@@ -152,6 +151,4 @@ class Tab1Fragment : Fragment() {
 
         markerViewModel.insertMarker(latitude, longitude)
     }
-
-
 }
