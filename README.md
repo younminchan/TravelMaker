@@ -1,15 +1,12 @@
 # TravelMaker(여행 도우미 앱)
 
-# 작업 필요 내용들
-* 하단바: 추천, 내 주변, 컬렉션, 마이
-* 컬렉션: 내 찜 목록, 내 장소목록, 나만의 노선
+# 다운로드
+Android: https://play.google.com/store/apps/details?id=com.newdeps.travelmaker  
 
-.. 추가로 무엇이 더 있을까? 
-* DB에 들어갈 맛집 및 장소 List 공공데이터 쪽에서 가져올 수 있는지?  
+iOS: https://apps.apple.com/kr/app/travelmaker-%EB%82%98%EB%A7%8C%EC%9D%98-%EC%97%AC%ED%96%89-%EC%BB%AC%EB%A0%89%EC%85%98/id6475383968  
 
-## 사용기술
-* Geocoder
 
-* (체크) 음성인식으로 결과값처리?!
 
-![IMG_9149](https://github.com/younminchan/TravelMaker/assets/14201479/e51b0c3c-de05-4dce-8abb-1efd41c73e94)
+
+![image](https://github.com/user-attachments/assets/49ff15b9-64ee-47e5-9b66-916b0bc62662)
+
